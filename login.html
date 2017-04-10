@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Register</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="main.css" rel="stylesheet">
+</head>
+  <body>
+    <div class="login">
+     <input id="treasure-input" type="text" name="treasure_id" placeholder="6-Digit Treasure Key" required="required">
+     <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">     </fb:login-button>
+     <button id="submit-btn" class="btn btn-primary btn-block btn-large">GET IT!</button>
+    </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- facebook login process -->
+    <script>
+  		// This is called with the results from from FB.getLoginStatus().
+  		function statusChangeCallback(response) {
+			//console.log('statusChangeCallback');
+			//console.log(response);
+		// The response object is returned with a status field that lets the
+		// app know the current login status of the person.
+		// Full docs on the response object can be found in the documentation
+		// for FB.getLoginStatus().
+			if (response.status === 'connected') {
+				// Logged into your app and Facebook.
+				console.log('connected');
+				//testAPI();
+			} else {
+			// The person is not logged into your app or we are unable to tell.
+			}
+  		}
+
+  		// This function is called when someone finishes with the Login
+  		// Button.  See the onlogin handler attached to it in the sample
+  		// code below.
+  		function checkLoginState() {
+    		FB.getLoginStatus(function(response) {
+      			statusChangeCallback(response);
+    		});
+			testAPI();
+  		}
+
+  		window.fbAsyncInit = function() {
+  			FB.init({
+				appId      : '730751350421123',
+				cookie     : true,  // enable cookies to allow the server to access 
+					// the session
+			 	xfbml      : true,  // parse social plugins on this page
+		   	 	version    : 'v2.8' // use graph api version 2.8
+		  	});
+
+		  // Now that we've initialized the JavaScript SDK, we call 
+		  // FB.getLoginStatus().  This function gets the state of the
+		  // person visiting this page and can return one of three states to
+		  // the callback you provide.  They can be:
+		  //
+		  // 1. Logged into your app ('connected')
+		  // 2. Logged into Facebook, but not your app ('not_authorized')
+		  // 3. Not logged into Facebook and can't tell if they are logged into
+		  //    your app or not.
+		  //
+		  // These three cases are handled in the callback function.
+
+	  		FB.getLoginStatus(function(response) {
+	    		statusChangeCallback(response);
+	  		});
+
+	  	};
+
+	  	// Load the SDK asynchronously
+	  	(function(d, s, id) {
+	    		var js, fjs = d.getElementsByTagName(s)[0];
+	   		if (d.getElementById(id)) return;
+	   		js = d.createElement(s); js.id = id;
+	    		js.src = "//connect.facebook.net/en_US/sdk.js";
+	    		fjs.parentNode.insertBefore(js, fjs);
+	  	}(document, 'script', 'facebook-jssdk'));
+
+	  	// Here we run a very simple test of the Graph API after login is
+	  	// successful.  See statusChangeCallback() for when this call is made.
+		function testAPI() {
+		        var obj = new Object();
+			console.log('Welcome!  Fetching your information.... ');
+			FB.api('/me?fields=name,email,picture', function(response) {
+				obj.name = response.name;
+				obj.email = response.email;
+				obj.profileImage = response.picture.data.url;
+				obj.fromSource = 'facebook';
+				console.log('login for',obj.name, obj.email);
+				console.log(obj.profileImage);
+			});
+
+			if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+			console.log('1111111111111');
+			obj.lat = position.coords.latitude;
+	        	obj.lng = position.coords.longitude;
+	        	console.log(obj.name, obj.email, obj.profileImage, obj.lat, obj.lng);
+			$.ajax({
+				url: '/php/insert.php',
+				type: 'POST',
+				data: JSON.stringify(obj),
+				dataType: 'json',
+				contentType: 'application/json',
+				success: function(data) {
+					console.log(data);
+					var json = $.parseJSON(data);
+					console.log(json.curr_lat, json.curr_lng);	
+				},
+				error: function(xhr, status, data) {
+					console.log(xhr.responseText);
+					window.location.href = "response-backup.html";
+					//$('body').empy();
+					//$('body').append('<div id="map"></div>');
+				}	
+			});	
+			});
+			} else {
+				alert("Browser doesn't support geolocation!");
+			}
+				
+	 	}
+
+	$(function(){
+		$("#submit-btn").click(function(){
+			var obj = new Object();
+			obj.name = $('#name-input').val();
+			obj.email = $('#email-input').val();
+			obj.fromSource = 'website';
+			obj.profileImage = 'http://www.freeiconspng.com/uploads/grab-vector-graphic-person-icon--imagebasket-13.png';			
+			if (navigator.geolocation) {
+			console.log('website location init...');
+			navigator.geolocation.getCurrentPosition(function(position) {
+			obj.lat = position.coords.latitude;
+			obj.lng = position.coords.longitude;
+			console.log(obj.name, obj.email, obj.lat, obj.lng);
+			$.ajax({
+				url: '/php/insert.php',
+				type: 'POST',
+				data: JSON.stringify(obj),
+				dataType: 'json',
+				contentType: 'application/json',
+				success: function(data) {
+					console.log(data);
+					var json = $.parseJSON(data);
+					console.log(json.curr_lat, json.curr_lng);	
+				},
+				error: function(xhr, status, data) {
+					console.log(xhr.responseText);
+					window.location.href = "response-backup.html";
+				}
+			});	
+		});
+			} else {
+				alert("Browser doesn't support geolocation!");
+			}
+				
+			});
+	});
+    </script>
+  </body>
+</html>
+
