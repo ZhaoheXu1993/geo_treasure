@@ -70,8 +70,28 @@
 				obj.email = response.email;
 				obj.fb_id = response.id;
 				obj.img_url = response.picture.data.url;
-			});				
+				console.log(JSON.stringify(obj));
+			});			
+			$.ajax({
+				url: 'php/create_user.php',
+				type: 'POST',
+				data: JSON.stringify(obj),
+				dataType: 'json',
+				contentType: 'application/json',
+				success: function(response_data) {
+					console.log(response_data);
+					console.log(response_data.user_uuid);
+				},
+				error: function(xhr, status, data) {
+					console.log(xhr.responseText);
+				}
+			});		
 	 	}
+    </script>
+
+    <!-- check treause & get treasure -->
+    <script>
+    
     </script>
   </body>
 </html>

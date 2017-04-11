@@ -13,7 +13,13 @@
 		die("Connection failed: " . $conn->connect_error);
 	}
 
-	echo "success";
+	// $sql = "select user_uuid, fb_id from user where fb_id='fb000'";
+	// $result = $conn->query($sql);
+	// while($row = $result->fetch_assoc()) {
+	// 	echo json_encode($row);
+	// }
 
-	$conn->close();
+	//echo "success";
+
+	//$conn->close();
 ?>
