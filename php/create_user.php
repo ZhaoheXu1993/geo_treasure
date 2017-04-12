@@ -2,32 +2,28 @@
 	require_once('connect.php');
 
 	$data = json_decode(file_get_contents("php://input"));
-	$sql = "SELECT user_uuid, fb_id FROM user WHERE fb_id='fb000'";
-	//echo json_encode($conn);
-	$result = $conn->query($sql);
+	$get_user_sql = "SELECT user_uuid FROM user WHERE fb_id='$data->fb_id'";
+
+	header('Content-Type:application/json');
+
+	$result = $conn->query($get_user_sql);
 	$response_data = [];
 
 	$row = $result->fetch_assoc();
-	//echo json_encode($row);
 
 	if ($result->num_rows > 0) {
+		// existing user
 		$response_data = ["user_uuid" => $row["user_uuid"]];
 		echo json_encode($response_data);
 	} else {
-		echo 'no user';
+		// no such user, create a new one
+		$uniqid = uniqid();
+		$create_user_sql = "INSERT INTO user (user_uuid, name, email, fb_id, img_url) 
+							VALUES ('$uniqid', '$data->name', '$data->email','$data->fb_id', '$data->img_url')";
+		$conn->query($create_user_sql);
+		$response_data = ["user_uuid" => $uniqid];
+		echo json_encode($response_data);
 	}
-
-	/* get data from json */
-	// if (empty($data)) {
-	// 	echo " data empty";
-	// } else {
-	// 	echo $data->name;
-	// 	echo json_encode($data);
-	// }
-
-	// if (empty($_POST['name'])) {
-	// 	echo ' post empty';
-	// }
 
 	$conn->close();
 ?>
