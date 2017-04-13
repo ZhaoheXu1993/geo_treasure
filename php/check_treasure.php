@@ -1,6 +1,8 @@
 <?php
 	require_once('connect.php');
 
+	session_start();
+
 	$data = json_decode(file_get_contents("php://input"));
 	header('Content-Type:application/json');
 
@@ -121,6 +123,8 @@
 			$result = get_item($t_id);
 			$item_num = $result->fetch_assoc();
 			$response_data["item"] = $item_num["item"];
+
+			$_SESSION["treasure_uuid"] = $t_id;
 			echo json_encode($response_data);
 		}
 	}
