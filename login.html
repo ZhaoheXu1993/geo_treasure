@@ -12,12 +12,16 @@
 		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">     </fb:login-button>
 		<input id="treasure-input" type="text" name="treasure_id" placeholder="6-Digit Treasure Key" required="required">
 		<button id="submit-btn" class="btn btn-danger" disabled="true">GET IT!</button>
+		<div id="result"></div>
 	</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <!-- facebook login process -->
     <script>
+    	/* global variable */
+    	user_uuid = "";
+
   		function statusChangeCallback(response) {
 			if (response.status === 'connected') {
 				create_user();
@@ -76,24 +80,61 @@
 					//data: JSON.stringify(obj),
 					data: JSON.stringify(obj),
 					success: function(response_data) {
-						console.log(response_data);
-						//console.log(response_data.user_uuid);
+						user_uuid = response_data.user_uuid;
+						//console.log(user_uuid);
+						//console.log(response_data);
 					},
 					error: function(xhr, status, data) {
 						console.log(xhr.responseText);
 					}
 				});		
 			});	
-			// obj.cool = "reason";
-			// var data = JSON.stringify(obj);
-			// console.log(data);
-			
 	 	}
     </script>
 
     <!-- check treause & get treasure -->
     <script>
-
+    	$(function() {
+    		$('#submit-btn').click(function() {
+    			var t_id = $('#treasure-input').val();
+    			var u_id = user_uuid;
+    			if (t_id.length != 6) {
+    				alert('You must input 6-digit treausure ID.');
+    				return;
+    			}
+    			$.ajax({
+					url: 'php/check_treasure.php',
+					type: 'POST',
+					data: JSON.stringify({treasure_uuid: t_id, user_uuid: u_id}),
+					success: function(response_data) {
+						//console.log(response_data);
+						switch (response_data.status) {
+							case '200': {
+								document.getElementById('result').innerHTML = "<p>show items</p>";
+								alert('show items');
+								window.location.href = "map.html";
+								break;
+							};
+							case '300': {
+								document.getElementById('result').innerHTML = "<p>please get another one</p>";
+								alert('this treasure has been taken');
+								window.location.href = "rank.html";
+								break;
+							};
+							case '404': {
+								document.getElementById('result').innerHTML = "<p>no such treasure</p>";
+								alert('no such treasure');
+								break;
+							};
+							default: break;
+						}
+ 					},
+					error: function(xhr, status, data) {
+						console.log(xhr.responseText);
+					}
+				});
+    		});
+    	});
     </script>
   </body>
 </html>
