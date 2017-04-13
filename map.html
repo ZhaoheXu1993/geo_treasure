@@ -28,12 +28,19 @@
     	recent_treasure = new Array();
     </script>
 
-    <!-- get user info -->
+    <!-- count down -->
     <script>
     	$(function() {
-    				
-    	});
-    </script>
+    		var diff = 10;
+  			var x = setInterval(function() {
+   				diff--;
+		   		if (diff < 0) {
+		    		clearInterval(x);
+		    		window.location.href = "rank.html";
+		   		}
+		  		},1000);
+  		});
+	</script>
 
     <!-- google map -->
     <script>
