@@ -25,7 +25,7 @@
     <script>
     	user_info = new Object();
     	current_treasure = new Object();
-    	recent_treasure = new Object();
+    	recent_treasure = new Array();
     </script>
 
     <!-- get user info -->
@@ -48,16 +48,34 @@
 					} else if (response_data.status == "200") {
 						user_info = response_data.user_info;
 						current_treasure = response_data.current_treasure;
-						//console.log(response_data.treasure_list);
+						recent_treasure = response_data.treasure_list;
 						//console.log(user_info);
 						var map = new google.maps.Map(document.getElementById('map'), {
-			       	  		zoom: 16,
+			       	  		zoom: 14,
 			          		center: {lat: parseFloat(current_treasure.latitude), 
 			          			     lng: parseFloat(current_treasure.longtitude)}
 		          		});
 
 			        	// Create an array of alphabetical characters used to label the markers.
 			        	var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+			        	/* TODO: recent treasure locations */
+
+			        	/* user icon */
+			        	var user_marker = new google.maps.Marker({
+			        		position: {lat: parseFloat(current_treasure.latitude), 
+			          			       lng: parseFloat(current_treasure.longtitude)},
+			          		map: map,
+			          		icon: user_info.img_url
+			        	});
+
+			        	var locations = new Array();
+			        	for(var i = 0; i < recent_treasure.length; i++) {
+			        		locations.push({lat: parseFloat(recent_treasure[i].latitude), 
+			        						lng: parseFloat(recent_treasure[i].longtitude)});
+			        	}
+
+			        	console.log(locations);
 
 				        // Add some markers to the map.
 				        // Note: The code uses the JavaScript Array.prototype.map() method to
@@ -83,7 +101,9 @@
 				}
 			});
 	    }
-    
+    	
+    	/* default locations */
+    	/*
         var locations = [
         	{lat: -31.563910, lng: 147.154312},
         	{lat: -33.718234, lng: 150.363181},
@@ -109,6 +129,7 @@
 	        {lat: -42.735258, lng: 147.438000},
 	        {lat: -43.999792, lng: 170.463352}
       	]
+      	*/
     </script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
