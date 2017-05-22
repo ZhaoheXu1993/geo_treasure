@@ -11,9 +11,13 @@
 	  <br>
 	  item:<br>
 	  <input id="item" type="text" name="item" placeholder="item">
+		<br>
+		description:<br>
+		<input id="desrip" type="text" name="descrip" placeholder="description">
+
 	  <br><br>
 	  <input id="submit" type="submit" value="Submit">
-	</form> 
+	</form>
 
 	<p id="result"></p>
 
@@ -36,7 +40,7 @@
 						} else {
 							$('#result').html('failure');
 						}
-						
+
 					},
 					error: function(xhr, status, data) {
 						console.log(xhr.responseText);
@@ -51,7 +55,7 @@
 		function getLocation() {
 		    if (navigator.geolocation) {
 		        navigator.geolocation.getCurrentPosition(showPosition);
-		    } else { 
+		    } else {
 		        $('#result').html("Geolocation is not supported by this browser.");
 		    }
 		}
