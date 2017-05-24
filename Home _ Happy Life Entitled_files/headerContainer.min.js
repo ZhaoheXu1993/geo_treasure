@@ -1,0 +1,2 @@
+"use strict";define("headerContainer",["lodash","core","containerCommon"],function(i,e,n){var t=e.compMixins,s=n.mixins.fixedPositionContainerMixin;return{displayName:"HeaderContainer",mixins:[t.skinBasedComp,s],statics:{useSantaTypes:!0},getSkinProperties:function(){return{"":{style:this.getRootStyle(this.props.style)},inlineContent:{children:this.props.children}}}}});
+//# sourceMappingURL=headerContainer.min.js.map
