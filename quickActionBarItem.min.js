@@ -1,0 +1,2 @@
+"use strict";define("quickActionBarItem",["lodash","core","santaProps"],function(e,o,i){return{displayName:"QuickActionBarItem",mixins:[o.compMixins.skinBasedComp],propTypes:{compProp:i.Types.Component.compProp.isRequired,compData:i.Types.Component.compData.isRequired,theme:i.Types.Component.theme.isRequired},getSkinProperties:function(){return{}}}});
+//# sourceMappingURL=quickActionBarItem.min.js.map
