@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Rank</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta charset="utf-8">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" src="assets/styles/main_login.css">
+	<style>
+		table {
+			margin-top: 2%;
+		}
+
+		#facebook-field {
+    		float: right;
+    		vertical-align: middle;
+    		text-align: center;
+    		/* border-left: 3px solid #6699FF; */
+    		/* border-right: 3px solid; */
+    		height: 80px;
+    		line-height: 80px;
+    		padding-right: 5px;
+    		display:inline;
+    		position:absolute;
+    		right:3%;
+    		top:5%;
+
+    	}
+
+		#nav-container {
+			height: 80px;
+		}
+		#main-container {
+			margin: 130px 15%;
+			/* height: 700px; */
+			/* background-color: red; */
+		}
+
+    	#footer .container-fluid {
+    		height: 50px;
+    		line-height: 50px;
+    	}
+    	#footer .navbar-nav {
+    		height: 50px;
+    	}
+    	#footer a{
+    		color: white;
+    	}
+    	#footer a:focus {
+    		text-decoration-line: none;
+    	}
+    	#footer label {
+    		color: white;
+    	}
+
+    	.margin-bottom-5 {margin-bottom: 5px;}
+    	.margin-bottom-10 {margin-bottom: 10px;}
+    	.margin-bottom-15 {margin-bottom: 15px;}
+    	.margin-bottom-20 {margin-bottom: 20px;}
+
+
+    	@media screen and (max-width: 992px) {
+    		#footer .col-sm-12 {
+    			text-align: center;
+    		}
+    		#footer .row {
+    			margin-left: 15%;
+    			margin-right: 15%;
+    		}
+    	}
+
+    	@media screen and (min-width: 768px) {
+    		#fb-login-mobile {
+    			display: none;
+    		}
+    		#fb-login-desktop {
+    			display: block;
+    		}
+    	}
+
+    	@media screen and (max-width: 767px) {
+    		#main-container {
+				margin: 130px 5%;
+				/* height: 700px; */
+				/* background-color: red; */
+			}
+
+    		#fb-login-mobile {
+    			display: block;
+    		}
+    		#fb-login-desktop {
+    			display: none;
+    		}
+
+    		#footer .container-fluid {
+	    		height: 100px;
+	    		line-height: 50px;
+	    	}
+	    	#footer .navbar-nav {
+	    		height: 50px;
+	    	}
+	    	#footer .row {
+	    		margin-left: 0;
+	    		margin-right: 0;
+	    	}
+	    	#footer label {
+	    		font-size: 0.8em;
+	    	}
+	    	#footer a {
+	    		font-size: 0.8em;
+	    	}
+
+	    	.col-xs-12 {
+	    		text-align: center;
+	    	}
+    	}
+
+.zj_nav {
+	width: 100%;
+	display: inline;
+	font-size: 1.1em;
+	height: 3em;
+
+}
+
+.zj_nav a {
+	text-decoration: none;
+	color: #333;
+	display: block;
+	width: 100%;
+}
+
+.zj_nav>ul {
+	display: inline-block;
+	width: 100%;
+	background: #F5F5F5;
+	min-height: 2.5em;
+	margin: 0;
+	padding: 0;
+}
+
+.zj_nav li {
+	list-style: none;
+	height: 2.5em;
+	line-height: 2.5em;
+	display: inline-block;
+	background: #F5F5F5;
+	float: left;
+}
+
+.zj_nav>ul>li:not(.menu):not(.nav_header) {
+	padding: 0 1em;
+	position: relative;
+	transition: background 300ms linear;
+}
+
+.zj_nav>ul>li:not(.menu):not(.nav_header):after {
+	content: "";
+	width: 0%;
+	height: 3px;
+	background: #48771B;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	transition: width 300ms linear;
+}
+
+.zj_nav li:not(.menu):not(.nav_header):hover:after {
+	width: 100%;
+	left: 0;
+}
+
+.zj_nav>ul>li:not(.nav_header):hover {
+	background: #ccc;
+}
+
+li.nav_header {
+	color: #000;
+	font-family: Georgia;
+	font-size: 1.1em;
+	font-weight: 500;
+	height: 2.3em;
+	line-height: 2.3em;
+	padding: 0 1.5em;
+}
+
+li.menu {
+	background: #ccc;
+	width: 3em;
+	text-align: center;
+	padding: 0;
+	float: right;
+	display: none;
+}
+
+.zj_nav ul li.cur_page {
+	background: #ccc;
+	position: relative;
+	text-align: center;
+}
+
+.zj_nav ul li.cur_page:before {
+	content: "";
+	position: absolute;
+	z-index: 100;
+	top: 2.5em;
+	margin-left: -8px;
+	width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-top: 8px solid #ccc;
+}
+
+.zj_nav ul li.cur_page:hover:before {
+	border-top: 8px solid #48771B;
+}
+
+li .menu_bar {
+	width: 55%;
+	height: 2px;
+	background: #666;
+	margin: 9px auto auto auto;
+}
+.sub_nav{
+	position:absolute;
+	width:100%;
+	padding:0;
+	margin:0;
+	margin-left:-1em;
+	display:none;
+}
+.sub_nav li{
+	width:100%;
+	font-size:1em;
+	text-align:center;
+	transition: background 300ms linear;
+}
+.sub_nav li:hover{
+	background:#aaa;
+}
+
+
+.zj_nav>ul>li.collapse:not(.menu) {
+	display: inline-block;
+}
+
+
+
+    </style>
+</head>
+<body>
+	<div id="fb-root"></div>
+  	<div class="container-fluid">
+  		<nav class="navbar navbar-default navbar-fixed-top ">
+  			<div class="container-fluid">
+			    <a>
+			    <a class="navbar-brand" href="https://www.happylifeentitled.org" style="height: 80px; padding: 0 0;">
+			    	<img src="assets/images/logo.png" alt="HappyLifeEntitled" style="height: 100px;">
+			    </a>
+  				<div class="zj_nav">
+					<ul>
+						<li class="menu">
+							<div class="menu_bar"></div>
+							<div class="menu_bar"></div>
+							<div class="menu_bar"></div>
+						</li>
+						<li><a href="##">Home</a></li>
+						<li><a href="##">Map</a></li>
+						<li><a href="##">Rule</a></li>
+						<li><a href="##">Help</a></li>
+					</ul>
+				</div>
+				</a>
+  				<div id="facebook-field" class="container-fluid">
+  					<a id="fb-login-desktop" href="#">
+  						<img src="assets/images/fb-desktop.png" style="height: 45px;">
+  					</a>
+  					<a id="fb-login-mobile" href="#">
+  						<img src="assets/images/fb-mobile.png" style="height: 45px;">
+  					</a>
+  				</div>
+  			</div>
+  		</nav>
+  	</div>
+
+  	<!-- main rank -->
+  	<div id="main-container" class="container-fluid">
+  		<div class="row">
+  			<div class="btn-group" data-toggle="buttons" style="width:100%;">
+			    <label id="hunt-rank-btn" class="btn btn-success" style="width: 50%;" class="active">
+			    	<input type="radio" name="options">Treasure Hunter
+			    </label>
+			    <label id="scan-rank-btn" class="btn btn-success" style="width: 50%;">
+			    	<input type="radio" name="options">Treasure Scanner
+			    </label>
+		    </div>
+  		</div>
+  		<div id="top-rank-field">
+  		</div>
+  		<div id="user-rank-field">
+  		</div>
+  		<div id="search-rank-field">
+  		</div>
+  	</div>
+
+
+  	<nav id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+	  <div class="container-fluid" style="padding: 0 5%;">
+	    <ul class="nav navbar-nav" style="float: none;">
+	    	<div class="row">
+	    		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+	      			<label>© 2017, Happy Life Entitled, Inc. All rights reserved.</label>
+	      		</div>
+	      		<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4" style="text-align: center;">
+	      			<a href="mailto:info@happylifeentitled.org">Contact Us</a>
+	      		</div>
+	      		<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4" style="text-align: center;">
+	      			<a href="#">Twitter</a>
+	      		</div>
+	      		<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4" style="text-align: center;">
+	      			<a href="#">Instagram</a>
+	      		</div>
+	      		</div>
+	      	</div>
+	    </ul>
+	  </div>
+	</nav>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- facebook login process -->
+    <script>
+    	/* global variable */
+    	user_uuid = "";
+
+  		function statusChangeCallback(response) {
+			if (response.status === 'connected') {
+				create_user();
+				//console.log(1);
+				document.getElementsByClassName('submit-btn').disabled = false;
+			} else {
+				FB.login(function(response) {
+				    if (response.authResponse) {
+						console.log('Welcome!  Fetching your information.... ');
+						create_user();
+				    } else {
+ 						console.log('User cancelled login or did not fully authorize.');
+				    }
+				});
+			}
+  		}
+
+  		function checkLoginState() {
+    		FB.getLoginStatus(function(response) {
+      			statusChangeCallback(response);
+    		});
+    		//console.log(2);
+  		}
+
+  		window.fbAsyncInit = function() {
+  			FB.init({
+				appId      : '730751350421123',
+				cookie     : true,  // enable cookies to allow the server to access the session
+			 	xfbml      : true,  // parse social plugins on this page
+		   	 	version    : 'v2.8' // use graph api version 2.8
+		  	});
+
+	  		FB.getLoginStatus(function(response) {
+	  			//console.log(3);
+	    		statusChangeCallback(response);
+	  		});
+	  	};
+
+	  	// Load the SDK asynchronously
+		(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=730751350421123";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+		function get_rank() {
+			$.ajax({
+				url: 'php/get_rank.php',
+				type: 'GET',
+			
+				success: function(response_data) {
+					console.log(response_data);
+					if (response_data.top_rank) {
+						var ranks = response_data.top_rank;
+						//console.log(ranks);
+						var i = 0;
+						$('#top-rank-field').append("<table id='top-rank-table'><col width='15%'><col width='80%'><col width='5%'><tr><th>Rank</th><th>Name</th><th>Amount</th></tr></table>");
+						for (i = 0; i < ranks.length; i++) {
+							$('#top-rank-table').append("<tr><td>" 
+								+ (i+1) + "</td><td>"
+								+ "<img src='" 
+								+ ranks[i].img_url + "' height='50'>"
+								+ ranks[i].name + "</td><td>"
+								+ ranks[i].value + "</td></tr>"); 
+						}
+					}
+
+					if (response_data.user_rank) {
+						var rank = response_data.user_rank;
+						//console.log(rank);
+						$('#user-rank-field').append("<table id='user-rank-table'><col width='15%'><col width='80%'><col width='5%'><tr><th>Rank</th><th>Name</th><th>Amount</th></tr></table>");
+						$('#user-rank-table').append("<tr><td>" 
+								+ rank[0].rank + "</td><td>"
+								+ "<img src='" 
+								+ rank[0].img_url + "' height='50'>"
+								+ rank[0].name + "</td><td>"
+								+ rank[0].value + "</td></tr>"); 
+					}
+				},
+				error: function(xhr, status, data) {
+					console.log(xhr.responseText);
+				}
+			});	
+		}
+
+
+	  	// Here we run a very simple test of the Graph API after login is
+	  	// successful.  See statusChangeCallback() for when this call is made.
+		function create_user() {
+	        var obj = new Object();
+			FB.api('/me?fields=name,email,picture', function(response) {
+				//console.log(4);
+				console.log(response);
+				obj.name = response.name;
+				obj.email = response.email;
+				obj.fb_id = response.id;
+				obj.img_url = response.picture.data.url;
+				//console.log(JSON.stringify(obj));
+				$.ajax({
+					url: 'php/create_user.php',
+					type: 'POST',
+					//data: JSON.stringify(obj),
+					data: JSON.stringify(obj),
+					success: function(response_data) {
+						user_uuid = response_data.user_uuid;
+						get_rank();
+						//console.log(user_uuid);
+						//console.log(response_data);
+					},
+					error: function(xhr, status, data) {
+						console.log(xhr.responseText);
+					}
+				});		
+			});	
+	 	}
+    </script>
+    <script>
+    	$(function() {
+    		$('#fb-login-desktop').click(function() {
+    			checkLoginState();
+    		});
+
+    		$('#fb-login-mobile').click(function() {
+    			checkLoginState();
+    		});
+    	});
+    </script>
+
+	<!-- rank change -->
+	<script>
+		$(function() {
+		});
+	</script>
+
+	<!-- get rank -->
+	<script>
+		$(function() {
+				
+		});
+	</script>
+</body>
+</html>
