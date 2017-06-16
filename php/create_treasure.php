@@ -20,10 +20,10 @@
 		}
 	}
 
-	function create_treasure($lat, $lng, $item) {
+	function create_treasure($lat, $lng, $item, $description) {
 		$uniqid = generateUniqueID();
-		$sql = "INSERT INTO treasure (treasure_uuid, latitude, longtitude, item) 
-				VALUES ('$uniqid', '$lat', '$lng', '$item')";
+		$sql = "INSERT INTO treasure (treasure_uuid, latitude, longtitude, item, description) 
+				VALUES ('$uniqid', '$lat', '$lng', '$item', '$description')";
 		$result = $GLOBALS["conn"]->query($sql);
 		return $result;
 	}
@@ -32,7 +32,7 @@
 		200: success
 		404: failed
 	*/
-	$result = create_treasure(floatval($data->lat), floatval($data->lng), intval($data->item));
+	$result = create_treasure(floatval($data->lat), floatval($data->lng), intval($data->item), $data->description);
 	if ($result) {
 		$response_data = ["status" => "200"];
 	} else {

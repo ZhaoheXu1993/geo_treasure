@@ -21,8 +21,8 @@
 	} else {
 		// no such user, create a new one
 		$uniqid = uniqid();
-		$create_user_sql = "INSERT INTO user (user_uuid, name, email, fb_id, img_url) 
-							VALUES ('$uniqid', '$data->name', '$data->email','$data->fb_id', '$data->img_url')";
+		$create_user_sql = "INSERT INTO user (user_uuid, name, email, link, fb_id, img_url) 
+							VALUES ('$uniqid', '$data->name', '$data->email', '$data->link', '$data->fb_id', '$data->img_url')";
 		$conn->query($create_user_sql);
 		$response_data = ["user_uuid" => $uniqid];
 		$_SESSION['user_uuid'] = $uniqid;

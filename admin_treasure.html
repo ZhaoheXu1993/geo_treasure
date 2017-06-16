@@ -11,6 +11,9 @@
 	  <br>
 	  item:<br>
 	  <input id="item" type="text" name="item" placeholder="item">
+	  <br>
+	  description:<br>
+	  <input id="description" type="text" name="description" placeholder="description">
 	  <br><br>
 	  <input id="submit" type="submit" value="Submit">
 	</form> 
@@ -25,9 +28,10 @@
 				obj.lat = $('#lat').val();
 				obj.lng = $('#lng').val();
 				obj.item = $('#item').val();
+				obj.description = $('#description').val();
 
 				$.ajax({
-					url: 'php/insert_treasure.php',
+					url: 'php/create_treasure.php',
 					type: 'POST',
 					data: JSON.stringify(obj),
 					success: function(response_data) {
