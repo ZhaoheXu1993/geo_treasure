@@ -36,6 +36,10 @@
 
 }
 
+#btn-fb-logout-desktop {
+	display: none;
+}
+
 /* treasure take */
 #container-treasure {
 	/*background-color: orange;*/

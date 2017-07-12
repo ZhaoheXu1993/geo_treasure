@@ -1,0 +1,105 @@
+<html>
+<head>
+</head>
+<body>
+<div class="fb-login-button" data-width="300" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div>
+<div id="fb-root"></div>
+<button class="btn" id="fb-login-status">FB.getLoginStatus()</button>
+<button class="btn" id="fb-login-status-force">FB.getLoginStatus() force=true</button>
+<button class="btn" id="fb-get-auth-response">FB.getAuthResponse()</button>
+<button class="btn" id="fb-login">FB.login()</button>
+<button class="btn" id="fb-permissions">FB.login() with Permissions</button>
+<button class="btn" id="fb-logout">FB.logout()</button>
+
+
+<!-- jquery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+window.fbAsyncInit = function() {
+  FB.init({
+    appId: '730751350421123',
+    cookie: true, // enable cookies to allow the server to access the session
+    xfbml: true, // parse social plugins on this page
+    status: true,
+    version: 'v2.8' // use graph api version 2.8
+  });
+
+  FB.Event.subscribe('auth.login', function(response) {
+    console.log('auth.login event handler', response);
+  });
+  FB.Event.subscribe('auth.logout', function(response) {
+    console.log('auth.logout event handler', response);
+  });
+  FB.Event.subscribe('auth.statusChange', function(response) {
+    console.log('auth.statusChange event handler', response);
+  });
+  FB.Event.subscribe('auth.authResponseChange', function(response) {
+    console.log('auth.authResponseChange event handler', response);
+  });
+
+};
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=730751350421123";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+// In your JavaScript code:
+var login_event = function(response) {
+  console.log("login_event");
+  console.log(response.status);
+  console.log(response);
+}
+
+var logout_event = function(response) {
+  console.log("logout_event");
+  console.log(response.status);
+  console.log(response);
+}
+
+document.getElementById('fb-login-status').onclick = function() {
+  FB.getLoginStatus(function(response) {
+    console.log('FB.getLoginStatus callback', response);
+  });
+};
+
+document.getElementById('fb-login-status-force').onclick = function() {
+  FB.getLoginStatus(function(response) {
+    console.log('FB.getLoginStatus force=true callback', response);
+  }, true);
+};
+
+document.getElementById('fb-get-auth-response').onclick = function() {
+  console.log('FB.getAuthResponse', FB.getAuthResponse());
+};
+
+document.getElementById('fb-login').onclick = function() {
+  FB.login(function(response) {
+    console.log('FB.login callback', response);
+  });
+};
+
+document.getElementById('fb-permissions').onclick = function() {
+  FB.login(
+    function(response) {
+      console.log('FB.login with permissions callback', response);
+    },
+    { scope: 'publish_actions' }
+  );
+};
+
+document.getElementById('fb-logout').onclick = function() {
+  FB.getLoginStatus(function(response) {
+        if (response && response.status === 'connected') {
+            FB.logout(function(response) {
+                document.location.reload();
+            });
+        }
+    });
+};
+</script>
+</body>
+</html>

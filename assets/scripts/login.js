@@ -10,6 +10,12 @@ function enable_treasure() {
 
 function statusChangeCallback(response) {
 	if (response.status === 'connected') {
+		FB.login(
+			function(response) {
+			  console.log('FB.login with permissions callback', response);
+			},
+			{ scope: 'publish_actions' }
+		);
 		create_user();
 
 		/* enable treasure */
@@ -47,7 +53,36 @@ window.fbAsyncInit = function() {
 		appId: '730751350421123',
 		cookie: true, // enable cookies to allow the server to access the session
 		xfbml: true, // parse social plugins on this page
+		status: true,
 		version: 'v2.8' // use graph api version 2.8
+	});
+
+	FB.Event.subscribe('auth.login', function(response) {
+		console.log('auth.login event handler', response);
+	});
+	FB.Event.subscribe('auth.logout', function(response) {
+		console.log('auth.logout event handler', response);
+	});
+	FB.Event.subscribe('auth.statusChange', function(response) {
+		console.log('auth.statusChange event handler', response);
+	});
+	FB.Event.subscribe('auth.authResponseChange', function(response) {
+		console.log('auth.authResponseChange event handler', response);
+	});
+
+	FB.getLoginStatus(function(response) {
+		if (response.status === 'connected') {
+			var btn = document.getElementById('btn-fb-login-desktop');
+			btn.childNodes[1].src = "https://treasurehuntingpro.com/assets/images/fb-continue.png";
+
+			create_user();
+
+			/* enable treasure */
+			enable_treasure();
+
+			/* user guide */
+			guide();
+		}
 	});
 };
 

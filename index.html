@@ -37,6 +37,9 @@
 						<a id="btn-fb-login-desktop" href="#">
 							<img src="assets/images/fb-desktop.png">
 						</a>
+						<a id="btn-fb-logout-desktop" href="#">
+							<img src="assets/images/fb-logout.png">
+						</a>
 					</div>
 					<div id="container-welcome" class="row">
 						<!-- welcome content -->
@@ -109,34 +112,49 @@
 			/* take treasure */
 			$('#btn-treasure-desktop').click(function() {
 				treasure_uuid = $('#input-treasure-desktop').val();
-				if (validation(user_uuid, treasure_uuid) == '200') {
-					var item_name = take_treasure(user_uuid, treasure_uuid);
-					/* dialog */
-				} else if (validation(treasure_uuid) == '300') {
-					/* dialog */
-				} else if (validation(treasure_uuid) == '406') {
-					/* dialog */
-					$('#dialog').html("Please input 6 digit.")
-					$('#dialog').dialog("open");
-				} else if (validation(treasure_uuid) == '404') {
-					/* dialog */
-				}
+
+				var response = take_treasure(treasure_uuid);
+
+				// if (take_treasure(treasure_uuid) == '200') {
+				// 	/* dialog: success*/
+				// 	var item_name = take_treasure(treasure_uuid);
+					
+				// } else if (validation(treasure_uuid) == '406') {
+				// 	/* dialog: length error */
+				// 	//$('#dialog').html("Please input 6 digit.")
+				// 	//$('#dialog').dialog("open");
+				// 	alert('Please input 6 digit.');
+				// } else if (validation(treasure_uuid) == '404') {
+				// 	/* dialog: no such treasure */
+				// 	alert('Please enter correct treasure id.');
+				// } else if (validation(treasure_uuid) == '500') {
+				// 	/* dialog: no such user */
+				// 	alert('Please refresh your page and take it again.')
+				// }
 			});
 			
 
 			/* map */
+			$('#btn-treasure').click(function() {
+				window.location.href = "https://treasurehuntingpro.com/map.html";
+			});
 
 			/* rules */
-			$('')
 
 			/* purchase */
+			$('#btn-purchase').click(function() {
+				window.location.href = "https://treasurehuntingpro.com/purchase.html";
+			})
 
 			/* rank */
+			$('#btn-rank').click(function() {
+				window.location.href = "https://treasurehuntingpro.com/rank.html";
+			});
 
 			/* repaint when resized */
 			$(window).resize(function(){
-				repaint();
-			})
+				//repaint();
+			});
 		});
 	</script>
 	

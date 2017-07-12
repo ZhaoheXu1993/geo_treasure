@@ -11,7 +11,7 @@
 	/* insert treasure */
 	function generateUniqueID() {
 		$token = substr(md5(uniqid(rand(), true)),0,6);  // creates a 6 digit token
-		$sql = "SELECT count(*) FROM treasure WHERE treasure_uuid=$token";
+		$sql = "SELECT treasure_uuid FROM treasure WHERE treasure_uuid=$token";
 		$result = $GLOBALS["conn"]->query($sql);
 		if ($result->num_rows != 0) {
 		  generateUniqueID();

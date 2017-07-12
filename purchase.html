@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>HappyLifeEntitled</title>
+
+	<!-- meta tags -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+	<!-- bootstrap css library -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- navbar css -->
+	<link rel="stylesheet" type="text/css" href="assets/styles/hle_navbar.css">
+
+	<!-- purchase body -->
+	<!--<link rel="stylesheet" type="text/css" href="assets/styles/purchase_body.css">-->
+	<style>
+		.container-item {
+			border: 5px solid lightblue;
+			border-radius: 5px;
+			margin-top: 5%;
+			height: 90%;
+		}
+
+		.item-info {
+			border-style: solid;
+			border-color: lightblue;
+			border-width: 0px 0px 5px 0px;
+			height: 50%;
+		}
+
+		.item-description {
+			border-style: solid;
+			border-color: lightblue;
+			border-width: 0px 0px 5px 0px;
+			height: 30%;
+		}
+
+		.item-description p {
+			margin: 10px 10px 10px 10px;
+		}
+
+		.item-purchase {
+			height: 20%;
+		}
+
+		.item-purchase > .row {
+			height: 100%;
+		}
+
+		.item-image img {
+			height: 100%;
+		}
+
+		.item-usage > .row {
+			height: 100%;
+		}
+
+		.item-purchase > .row > .col-lg-6,
+		.item-purchase > .row > .col-md-6,
+		.item-purchase > .row > .col-sm-6,
+		.item-purchase > .row > .col-xs-6  {
+			height: inherit;
+			text-align: center;
+			line-height: inherit;
+		}
+
+		#input-helmet-quantity, #input-bomb-quantity {
+			text-align: center;
+		}
+
+		@media screen and (min-width: 768px) {
+			.item-image {
+				border-style: solid;
+				border-color: lightblue;
+				border-width: 0px 5px 0px 0px;
+				text-align: center;
+				height: 100%;
+			}
+
+			.item-usage {
+				height: 100%;
+				text-align: center;
+			}
+
+			.item-usage .row .col-lg-12,
+			.item-usage .row .col-md-12 ,
+			.item-usage .row .col-sm-12 {
+				height: 50%;
+			}
+
+			.item-usage p,
+			.item-description p {
+				font-size: 18px;
+			}
+
+			#input-helmet-quantity,
+			#input-bomb-quantity,
+			#btn-purchase-helmet,
+			#btn-purchase-bomb {
+				font-size: 23px;
+			}
+		}
+
+		@media screen and (max-width: 767px) {
+			.item-image {
+				border-style: solid;
+				border-color: lightblue;
+				border-width: 0px 0px 5px 0px;
+				text-align: center;
+				height: 80%;
+			}
+
+			.item-usage {
+				height: 20%;
+				text-align: left;
+			}
+
+			.item-usage .row .col-xs-6 {
+				height: 100%;
+			}
+
+			.item-usage p, 
+			.item-description p {
+				font-size: 12px;
+			}
+
+			#input-helmet-quantity, 
+			#input-bomb-quantity,
+			#btn-purchase-helmet,
+			#btn-purchase-bomb {
+				font-size: 17px;
+			}
+
+			#purchased-helmet-desktop,
+			#purchased-bomb-desktop,
+			#used-helmet-desktop,
+			#used-bomb-desktop {
+				display: none;
+			}
+		}
+	</style>
+
+</head>
+<body>
+	<!-- navbar -->
+	<div id="container-navbar" class="container-fluid">
+		<nav class="navbar navbar-default">
+			<div class="navbar-header">
+				<button id="btn-home-mobile" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#" aria-expanded="false" aria-controls="navbar">
+					<span><a href="index.html"><img class="img-responsive" src="assets/images/home.png"></a></span>
+				</button>
+				<a class="navbar-brand" href="https://www.happylifeentitled.org">
+					<img src="assets/images/logo.png" alt="HappyLifeEntitled">
+				</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="index.html">HOME</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<!-- main body -->
+	<div class="container-fluid">
+		<div class="row">
+			<!-- helmet container -->
+			<div class="col-lg-offset-1 col-lg-4 col-md-offset-1 col-md-4 col-sm-offset-1 col-sm-4 col-xs-offset-1 col-xs-10 container-item">
+				<!-- item image -->
+				<div class="row item-info">
+					<div class="col-lg-8 col-md-10 col-sm-10 col-xs-12 item-image">
+						<img class="img-response" src="assets/images/helmet.png" />
+					</div>
+					<div class="col-lg-4 col-md-2 col-sm-2 col-xs-12 item-usage">
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
+								<p id="purchased-helmet">Purchased:</p>
+								<p id="purchased-helmet-desktop"></p>
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
+								<p id="used-helmet">Used:</p>
+								<p id="used-helmet-desktop"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- item descrip -->
+				<div class="row item-description">
+					<p>Helmet $0.99 each: </p>
+					<p>Helmet is to prevent bomb. If you have helmets, everytime you scan, one helmet will be used.</p>
+				</div>
+				<!-- item purchase field -->
+				<div class="row item-purchase">
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input id="input-helmet-quantity"  type="text" name="helmet_amount" placeholder="Quantity">
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<button id="btn-purchase-helmet" class="btn btn-danger"  onclick="getQuantity('helmet')">PAY</button>
+						</div>
+					</div>
+				</div>			
+			</div>
+
+			<!-- bomb container -->
+			<div class="col-lg-offset-2 col-lg-4 col-md-offset-2 col-md-4 col-sm-offset-2 col-sm-4 col-xs-offset-1 col-xs-10 container-item">
+				<!-- item image -->
+				<div class="row item-info">
+					<div class="col-lg-8 col-md-10 col-sm-10 col-xs-12 item-image">
+						<img class="img-response" src="assets/images/bomb.png" />
+					</div>
+					<div class="col-lg-4 col-md-2 col-sm-2 col-xs-12 item-usage">
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
+								<p id="purchased-bomb">Purchased:</p>
+								<p id="purchased-bomb-desktop"></p>
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
+								<p id="used-bomb">Used:</p>
+								<p id="used-bomb-desktop"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- item descrip -->
+				<div class="row item-description">
+					<p>Bomb $9.99 each: </p>
+					<p>Bomb is used to make other players lose their treasure, in addition, the player who planted this bomb can obtain half bombed treasure.</p>
+				</div>
+				<!-- item purchase field -->
+				<div class="row item-purchase">
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input id="input-bomb-quantity"  type="text" name="bomb_amount" placeholder="Quantity">
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<button id="btn-purchase-bomb" class="btn btn-danger" onclick="getQuantity('bomb')">PAY</button>
+						</div>
+					</div>
+				</div>			
+			</div>
+			<div id="fb-root"></div>
+		</div>
+	</div>
+
+	<!-- footer -->
+
+	<!-- jquery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<!-- bootstrap js library -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- purchase repaint -->
+	<script>
+		function repaint() {
+			var h = window.innerHeight;
+			var w = window.innerWidth;
+			var nav_height = $('#container-navbar').height();
+
+			var panel_height = (h - nav_height) * 0.8;
+			var panel_margin_top = (h - nav_height) * 0.1;
+
+			$('.container-item').css('height', panel_height + 'px');
+			$('.container-item').css('margin-top', panel_margin_top + 'px');
+			
+			$('.item-usage .col-xs-6').css('line-height', $('.item-usage .col-xs-6').css('height'));
+			$('.item-usage .col-sm-12').css('line-height', $('.item-usage .col-sm-12').css('height'));
+			$('.item-usage .col-md-12').css('line-height', $('.item-usage .col-md-12').css('height'));
+			$('.item-usage .col-lg-12').css('line-height', $('.item-usage .col-lg-12').css('height'));
+
+			var purchase_height = $('.item-purchase > .row').height();
+			var purchase_width = $('.item-purchase > .row').width();
+
+			$('.item-purchase > .row').css('line-height', purchase_height + 'px');
+			$('#input-helmet-quantity').css('height', purchase_height * 1 + 'px');
+			$('#input-helmet-quantity').css('width', purchase_width * 0.3 + 'px');
+			$('#btn-purchase-helmet').css('width', purchase_width * 0.3 + 'px');
+			$('#btn-purchase-helmet').css('height', purchase_height * 0.6 + 'px');
+			$('#input-bomb-quantity').css('height', purchase_height * 1 + 'px');
+			$('#input-bomb-quantity').css('width', purchase_width * 0.3 + 'px');
+			$('#btn-purchase-bomb').css('width', purchase_width * 0.3 + 'px');
+			$('#btn-purchase-bomb').css('height', purchase_height * 0.6 + 'px');
+		}
+	</script>
+
+	<script>
+		var MAX_BOMB = 0;
+
+		function getQuantity(type) {
+			var id = "#input-" + type + "-quantity";
+			var quantity = $(id).val();
+
+			if (type == "bomb") {
+				/* check max bomb */
+				if (quantity > MAX_BOMB) {
+					alert('You can not purchase more than ' + MAX_BOMB + ' bombs.');
+					$(id).val("");
+					return;
+				}
+			}
+
+			document.cookie = "type=" + type;
+			document.cookie = "quantity=" + quantity;
+
+			window.location.href = "payment.html";
+		}
+
+		$(function() {
+			repaint();
+
+			$.ajax({
+				url: 'php/get_user_items.php',
+				type: 'GET',
+				success: function(response_data) {
+					console.log(response_data.max_bomb);
+					MAX_BOMB = response_data.max_bomb;
+					$('#purchased-helmet').append(response_data.total_helmet);
+					$('#used-helmet').append(response_data.used_helmet);
+					$('#purchased-bomb').append(response_data.total_bomb);
+					$('#used-bomb').append(response_data.used_bomb);
+				},
+				error: function(xhr, status, data) {
+					console.log(xhr.responseText);
+					console.log(status);
+					console.log(data);
+				}
+			});
+
+			$(window).resize(function() {
+				//repaint();
+			});
+		});
+	</script>
+</body>
+</html>

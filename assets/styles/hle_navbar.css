@@ -28,3 +28,19 @@
 	line-height: 50px;
 }
 
+/* navbar right button */
+#btn-home-mobile {
+	height: 50px;
+	width: 50px;
+	margin-top: 15px;
+}
+
+.navbar-nav li {
+	border-style: solid;
+	border-color: lightblue;
+	border-width: 0px 0px 0px 2px;
+}
+
+.navbar-nav li:hover{
+	background-color: lightblue;
+}
