@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>HappyLifeEntitled</title>
+
+	<!-- meta tags -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+	<!-- bootstrap css library -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- navbar css -->
+	<link rel="stylesheet" type="text/css" href="assets/styles/hle_navbar.css">
+	<link rel="stylesheet" type="text/css" href="assets/styles/home_body.css">
+	<link rel="stylesheet" type="text/css" href="assets/styles/jquery-ui.css">
+</head>
+<body>
+	<div id="dialog" title="Treasure Hunting..."></div>
+	<!-- navbar -->
+	<div id="container-navbar" class="container-fluid">
+		<nav class="navbar navbar-default">
+			<a class="navbar-brand" href="https://www.happylifeentitled.org">
+				<img src="assets/images/logo.png" alt="HappyLifeEntitled">
+			</a>
+		</nav>
+	</div>
+	<!-- main body -->
+	<div id="container-main" class="container-fluid">
+		<div class="row">
+			<!-- login & take it -->
+			<div id="container-main-left" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div id="container-panel">
+					<div id="container-fb-login" class="row">
+						<!-- facebook login button -->
+						<a id="btn-fb-login-desktop" href="#">
+							<img src="assets/images/fb-desktop.png">
+						</a>
+						<a id="btn-fb-logout-desktop" href="#">
+							<img src="assets/images/fb-logout.png">
+						</a>
+					</div>
+					<div id="container-welcome" class="row">
+						<!-- welcome content -->
+						<p id="content-welcome">Welcome to Treasure Hunting</p>
+					</div>
+					<div id="container-treasure" class="row">
+						<!-- treasure take -->
+						<div id="container-input" class="row">
+							<input id="input-treasure-desktop" type="text" name="treasure_id" placeholder="6-digit ID">
+						</div>
+						<div id="container-submit" class="row">
+							<button id="btn-treasure-desktop" class="btn btn-danger">TAKE IT</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- menu -->
+			<div id="container-main-right" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<!-- treasure map & rules -->
+				<div id="container-items-left" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<div id="container-map" class="row">
+						<img id="btn-treasure" src='assets/images/treasure.png'>
+					</div>
+					<div id="container-rules" class="row">
+						<img id="btn-rules" src='assets/images/rule.png'>
+					</div>
+				</div>
+
+				<!-- rank & purchase -->
+				<div id="container-items-right" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<div id="container-rank" class="row">
+						<img id="btn-rank" src='assets/images/rank.png'>
+					</div>
+					<div id="container-purchase" class="row">
+						<img id="btn-purchase" src='assets/images/purchase.png'>
+					</div>
+				</div>
+			</div>
+			<div id="fb-root"></div>
+			
+
+	<!-- footer -->
+
+
+	<!-- jquery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<!-- bootstrap js library -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<!-- javascript -->
+	<script src='assets/scripts/jquery-ui.js'></script>
+	<script src='assets/scripts/repaint.js'></script>
+	<script src='assets/scripts/login.js'></script>
+	<script src='assets/scripts/treasure.js'></script>
+	<script src='assets/scripts/purchase.js'></script>
+	<script>
+		$(function(){
+			/* global variable */
+			var user_uuid;
+			var treasure_uuid;
+
+			/* paint front-end */
+			repaint();
+
+			/* login process */
+			$('#btn-fb-login-desktop').click(function() {
+				checkLoginState();
+			});
+
+			/* take treasure */
+			$('#btn-treasure-desktop').click(function() {
+				treasure_uuid = $('#input-treasure-desktop').val();
+
+				var response = take_treasure(treasure_uuid);
+
+				// if (take_treasure(treasure_uuid) == '200') {
+				// 	/* dialog: success*/
+				// 	var item_name = take_treasure(treasure_uuid);
+					
+				// } else if (validation(treasure_uuid) == '406') {
+				// 	/* dialog: length error */
+				// 	//$('#dialog').html("Please input 6 digit.")
+				// 	//$('#dialog').dialog("open");
+				// 	alert('Please input 6 digit.');
+				// } else if (validation(treasure_uuid) == '404') {
+				// 	/* dialog: no such treasure */
+				// 	alert('Please enter correct treasure id.');
+				// } else if (validation(treasure_uuid) == '500') {
+				// 	/* dialog: no such user */
+				// 	alert('Please refresh your page and take it again.')
+				// }
+			});
+			
+
+			/* map */
+			$('#btn-treasure').click(function() {
+				window.location.href = "https://treasurehuntingpro.com/map.html";
+			});
+
+			/* rules */
+
+			/* purchase */
+			$('#btn-purchase').click(function() {
+				window.location.href = "https://treasurehuntingpro.com/purchase.html";
+			})
+
+			/* rank */
+			$('#btn-rank').click(function() {
+				window.location.href = "https://treasurehuntingpro.com/rank.html";
+			});
+
+			/* repaint when resized */
+			$(window).resize(function(){
+				//repaint();
+			});
+		});
+	</script>
+	
+</body>
+</html>

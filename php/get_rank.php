@@ -3,9 +3,10 @@
 
 	session_start();
 
+	$data = json_decode(file_get_contents("php://input"));
+
 	/* global variables */
 	$GLOBALS["conn"] = $conn;
-	$NO_BODY = "no user";
 
 	/* get specific rank, user id, user name and img_url */
 	function get_rank_by_rank_name ($rank_name) {
@@ -28,40 +29,30 @@
 	/* rank calculator */
 	
 	header('Content-Type:application/json');
-	if (!isset($_SESSION["user_uuid"])) {
-		$response_data = ["status" => "404"];
-		echo json_encode($response_data);
-	} else if ($_SESSION["user_uuid"] == null) {
-		$response_data = ["status" => "404"];
-		echo json_encode($response_data);
-	} else {
-		$response_data = ["status" => "200"];
-		$u_id = $_SESSION["user_uuid"];
-		/* get user data */
-		$result = get_rank_by_rank_name("scan");
+	$response_data = ["status" => "200"];
+	$u_id = $_SESSION["user_uuid"];
+	/* get user data */
+	$result = get_rank_by_rank_name($data->rank_name);
 
-		if ($result->num_rows > 0) {
-			$i = 0;
-			while($row = $result->fetch_assoc()) {
-				$top_rank[] = array('name' => $row["name"],
-							        'img_url' => $row["img_url"],
-								    'value' => $row["value"]);
-				if ($row["user_uuid"] == $u_id) {
-					$user_rank[] = array('rank' => ($i + 1),
-						                 'name' => $row["name"],
-							     		 'img_url' => $row["img_url"],
-								 		 'value' => $row["value"]);
-					$response_data["user_rank"] = $user_rank;
-				}
-				$i++;
+	if ($result->num_rows > 0) {
+		$i = 0;
+		while($row = $result->fetch_assoc()) {
+			$top_rank[] = array('name' => $row["name"],
+						        'img_url' => $row["img_url"],
+							    'value' => $row["value"]);
+			if ($row["user_uuid"] == $u_id) {
+				$user_rank[] = array('rank' => ($i + 1),
+					                 'name' => $row["name"],
+						     		 'img_url' => $row["img_url"],
+							 		 'value' => $row["value"]);
+				$response_data["user_rank"] = $user_rank;
 			}
-			$response_data["top_rank"] = $top_rank;
-		} else {
-			$response_data["top_rank"] = $NO_BODY;
+			$i++;
 		}
-
-		echo json_encode($response_data);
+		$response_data["top_rank"] = $top_rank;
 	}
+
+	echo json_encode($response_data);
 
 	$conn->close();
 ?>

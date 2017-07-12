@@ -219,7 +219,7 @@
   		<div id="result" class="panel panel-default" style="text-align: center; display: none;"></div>
   	</div>
 
-  	<nav id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+  	<nav id="footer" class="navbar navbar-inverse" style="margin-bottom: 0px; border-radius: 0px;">
 	  <div class="container-fluid" style="padding: 0 5%;">
 	    <ul class="nav navbar-nav" style="float: none;">
 	    	<div class="row">
@@ -250,20 +250,20 @@
     	user_uuid = "";
 
   		function statusChangeCallback(response) {
-			if (response.status === 'connected') {
-				create_user();
-				//console.log(1);
-				document.getElementsByClassName('submit-btn').disabled = false;
-			} else {
-				FB.login(function(response) {
-				    if (response.authResponse) {
-						console.log('Welcome!  Fetching your information.... ');
-						create_user();
-				    } else {
- 						console.log('User cancelled login or did not fully authorize.');
-				    }
-				});
-			}
+  			if (response.status === 'connected') {
+  				create_user();
+  				//console.log(1);
+  				document.getElementsByClassName('submit-btn').disabled = false;
+  			} else {
+  				FB.login(function(response) {
+  				    if (response.authResponse) {
+  						console.log('Welcome!  Fetching your information.... ');
+  						create_user();
+  				    } else {
+   						console.log('User cancelled login or did not fully authorize.');
+  				    }
+  				});
+  			}
   		}
 
   		function checkLoginState() {

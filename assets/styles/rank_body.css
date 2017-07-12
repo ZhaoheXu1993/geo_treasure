@@ -1,0 +1,47 @@
+#container-buttons {
+	margin-top: 20px;
+	/* background-color: orange; */
+}
+
+#container-ranks {
+	margin-top: 20px;
+	/* 
+	border: 5px solid lightblue;
+	border-radius: 5px;
+	*/
+}
+
+#container-top-ranks {
+	margin-top: 5px;
+	/* 
+	border: 5px solid lightblue;
+	border-radius: 5px;
+	*/
+}
+
+#container-top-ranks tr {
+
+}
+
+th {
+	text-align: center;
+}
+
+.table-digit {
+	text-align:center;
+	width: 70px;
+}
+
+.table-content {
+	text-align: left;
+}
+
+.table-content p {
+	margin-left: 10px;
+}
+
+.table-content img {
+	height: 30px;
+	margin-right: 10px;
+	margin-left: 10px;
+}

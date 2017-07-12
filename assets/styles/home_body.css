@@ -1,0 +1,152 @@
+/* home body */
+#container-main {
+	background-color: #f5f8fa;
+}
+
+#container-main-left {
+	background-color: #f5f8fa;
+}
+
+#container-main-right {
+	background-color: #f5f8fa;
+}
+
+#container-main-right img {
+	cursor: pointer;
+}
+
+#container-main .col-lg-6 {
+	/*border: 1px solid;*/
+}
+
+/* login panel */
+#container-panel {
+	/*background-color: black;*/
+	border-radius: 15px;
+	border: 5px solid deepskyblue;
+}
+
+/* facebook login */
+#container-fb-login {
+	/*background-color: pink;*/
+}
+
+/* facebook login button desktop */
+#btn-fb-login-desktop {
+
+}
+
+#btn-fb-logout-desktop {
+	display: none;
+}
+
+/* treasure take */
+#container-treasure {
+	/*background-color: orange;*/
+}
+
+.disable-panel {
+	pointer-events: none;
+    opacity: 0.4;
+    /* background image */
+}
+
+#input-treasure-desktop {
+	text-align: center;
+}
+
+#container-input {
+	margin: 0 0 0 0;
+}
+
+#container-submit {
+	margin: 0 0 0 0;
+}
+
+/* welcome panel */
+#container-welcome {
+	background-color: deepskyblue;
+	color: white;
+}
+
+/* map panel */
+#container-map {
+	border-style: solid;
+    border-width: 0px 3px 3px 0px;
+    border-color: lightblue;
+	/*background-color: orange;*/
+}
+
+/* rules panel */
+#container-rules {
+	border-style: solid;
+    border-width: 0px 3px 0px 0px;
+    border-color: lightblue;
+	/*background-color: purple;*/
+}
+
+/* purchase panel */
+#container-purchase {
+	border-style: solid;
+    border-width: 0px 0px 0px 0px;
+    border-color: lightblue;
+	/*background-color: pink;*/
+}
+
+/* rank panel */
+#container-rank {
+	border-style: solid;
+    border-width: 0px 0px 3px 0px;
+    border-color: lightblue;
+	/*background-color: brown;*/
+}
+
+@media screen and (max-width: 768px) {
+	#btn-treasure-desktop {
+		font-size: 15px;
+	}
+
+	#input-treasure-desktop {
+		font-size: 15px;
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+	#btn-treasure-desktop {
+		font-size: 18px;
+	}
+
+	#input-treasure-desktop {
+		font-size: 18px;
+	}
+}
+
+@media screen and (min-width: 1280px) and (max-width: 1599px) {
+	#btn-treasure-desktop {
+		font-size: 23px;
+	}
+
+	#input-treasure-desktop {
+		font-size: 23px;
+	}
+}
+
+@media screen and (min-width: 1600px) and (max-width: 2559px) {
+	#btn-treasure-desktop {
+		font-size: 32px;
+	}
+
+	#input-treasure-desktop {
+		font-size: 32px;
+	}
+}
+
+@media screen and (min-width: 2560px) {
+	#btn-treasure-desktop {
+		font-size: 40px;
+	}
+
+	#input-treasure-desktop {
+		font-size: 40px;
+	}
+}

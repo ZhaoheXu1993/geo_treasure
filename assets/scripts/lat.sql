@@ -1,0 +1,1 @@
+SELECT treasure_uuid, latitude, longtitude FROM treasure WHERE latitude>=29.6434-0.0025 and latitude<=29.6434+0.0025 and longitude>=-82.3679-0.0025 and longitude<=-82.3679+0.0025 and is_deleted=0 and is_taken=0
