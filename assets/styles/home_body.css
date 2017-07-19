@@ -1,4 +1,4 @@
-/* home body */
+ home body */
 #container-main {
 	background-color: #f5f8fa;
 }
@@ -55,13 +55,13 @@
 	text-align: center;
 }
 
-#container-input {
+/*#container-input {
 	margin: 0 0 0 0;
 }
 
 #container-submit {
 	margin: 0 0 0 0;
-}
+}*/
 
 /* welcome panel */
 #container-welcome {
@@ -101,7 +101,77 @@
 	/*background-color: brown;*/
 }
 
-@media screen and (max-width: 768px) {
+.center {
+
+	margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+.width-100 {
+
+	width: 100%
+}
+
+.margin-auto {
+
+	margin: auto;
+}
+
+.padding-20 {
+
+	padding: 20px;
+}
+
+.padding-40 {
+
+	padding: 40px;
+}
+
+.padding-60-left {
+
+	padding-left: 60px;
+}
+
+.padding-60-right {
+
+	padding-right: 60px;
+}
+
+.padding-35-top {
+
+	padding-top: 35px;
+}
+
+.padding-40-bottom {
+
+	padding-bottom: 40px;
+}
+
+#btn-fb-login-desktop img:hover
+{
+	opacity: 0.4;
+
+}
+
+.images {
+	width: 75%;
+    padding: 20px;
+}
+.images:hover {
+	width: 65%;
+}
+
+.center-text {
+
+	text-align: center;
+}
+
+.line-height {
+
+
+}
+/*@media screen and (max-width: 768px) {
 	#btn-treasure-desktop {
 		font-size: 15px;
 	}

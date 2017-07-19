@@ -30,54 +30,61 @@
 	<div id="container-main" class="container-fluid">
 		<div class="row">
 			<!-- login & take it -->
-			<div id="container-main-left" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			<div id="container-main-left" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 padding-20 padding-60-left padding-60-right">
 				<div id="container-panel">
 					<div id="container-fb-login" class="row">
 						<!-- facebook login button -->
-						<a id="btn-fb-login-desktop" href="#">
-							<img src="assets/images/fb-desktop.png">
+						<a class="col-xs-12" id="btn-fb-login-desktop" href="#">
+							<img src="assets/images/fb-desktop.png" style="padding:50px; max-width: 100%;height: auto;">
 						</a>
 						<a id="btn-fb-logout-desktop" href="#">
 							<img src="assets/images/fb-logout.png">
 						</a>
 					</div>
-					<div id="container-welcome" class="row">
+					<div id="container-welcome" class="row center width-100 padding-35-top padding-40-bottom">
 						<!-- welcome content -->
-						<p id="content-welcome">Welcome to Treasure Hunting</p>
-					</div>
-					<div id="container-treasure" class="row">
-						<!-- treasure take -->
-						<div id="container-input" class="row">
-							<input id="input-treasure-desktop" type="text" name="treasure_id" placeholder="6-digit ID">
+						<div class="col-xs-12" >
+							<p style="font-size: 32px;" id="content-welcome">Welcome to Treasure Hunting</p>
 						</div>
-						<div id="container-submit" class="row">
-							<button id="btn-treasure-desktop" class="btn btn-danger">TAKE IT</button>
+						
+					</div>
+					<div id="container-treasure" class="row padding-40">
+						<!-- treasure take -->
+						<div id="container-input" class="row center margin-auto padding-40-bottom">
+							<input class="width-100" id="input-treasure-desktop" type="text" style="padding: 10px;" name="treasure_id" placeholder="6-digit ID">
+						</div>
+						<div id="container-submit" class="row center margin-auto">
+							<button id="btn-treasure-desktop" class="btn btn-danger width-100" style="padding: 10px;">TAKE IT</button>
 						</div>
 					</div>
 				</div>
 			</div>
 
 			<!-- menu -->
-			<div id="container-main-right" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			<div id="container-main-right" class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="line-height: 240px;">
 				<!-- treasure map & rules -->
-				<div id="container-items-left" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-					<div id="container-map" class="row">
-						<img id="btn-treasure" src='assets/images/treasure.png'>
+
+				<div class="row padding-40">
+					<div id="container-items-left" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<div id="container-map" class="row center-text">
+						<img class="images" id="btn-treasure" src='assets/images/treasure.png'>
 					</div>
-					<div id="container-rules" class="row">
-						<img id="btn-rules" src='assets/images/rule.png'>
+					<div id="container-rules" class="row center-text">
+						<img class="images" id="btn-rules" src='assets/images/rule.png'>
 					</div>
 				</div>
 
 				<!-- rank & purchase -->
 				<div id="container-items-right" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-					<div id="container-rank" class="row">
-						<img id="btn-rank" src='assets/images/rank.png'>
+					<div id="container-rank" class="row center-text">
+						<img class="images" id="btn-rank" src='assets/images/rank.png'>
 					</div>
-					<div id="container-purchase" class="row">
-						<img id="btn-purchase" src='assets/images/purchase.png'>
+					<div id="container-purchase" class="row center-text">
+						<img class="images" id="btn-purchase" src='assets/images/purchase.png'>
 					</div>
 				</div>
+				</div>
+				
 			</div>
 			<div id="fb-root"></div>
 			
@@ -102,7 +109,7 @@
 			var treasure_uuid;
 
 			/* paint front-end */
-			repaint();
+			//repaint();
 
 			/* login process */
 			$('#btn-fb-login-desktop').click(function() {
